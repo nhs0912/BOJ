@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list id="785a1555-1141-4730-b9b8-eb0e70121bdc" name="Default" comment="-5622번 풀이 추가&#10;-폴더 이름 변경&#10;-문제 번호 이름 변경 &#10;(Problem_문제번호 -&gt; P_문제번호)" />
     <list default="true" id="e97d1650-f14e-4488-8408-77d042793a21" name="ignore" comment="innore some files.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Problems/P_2292.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
     </list>
     <ignored path="BOJ.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,10 +27,9 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+            <state relative-caret-position="392">
+              <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
               <folding>
-                <element signature="e#610#611#0" expanded="true" />
                 <element signature="e#649#650#0" expanded="true" />
                 <element signature="e#694#695#0" expanded="true" />
                 <element signature="e#720#721#0" expanded="true" />
@@ -635,7 +632,7 @@
       <option name="presentableId" value="Default" />
       <updated>1481726768263</updated>
       <workItem from="1481726776917" duration="6634000" />
-      <workItem from="1481772113969" duration="10436000" />
+      <workItem from="1481772113969" duration="11047000" />
     </task>
     <task id="LOCAL-00001" summary="-5622번 풀이 추가&#10;-폴더 이름 변경&#10;-문제 번호 이름 변경 &#10;(Problem_문제번호 -&gt; P_문제번호)">
       <created>1481771592350</created>
@@ -665,11 +662,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481792044817</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="innore some files.">
+      <created>1481795786083</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1481795786083</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17070000" />
+    <option name="totallyTimeSpent" value="17681000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -736,7 +740,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#610#611#0" expanded="true" />
             <element signature="e#649#650#0" expanded="true" />
             <element signature="e#694#695#0" expanded="true" />
             <element signature="e#720#721#0" expanded="true" />
@@ -782,7 +785,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#610#611#0" expanded="true" />
             <element signature="e#649#650#0" expanded="true" />
             <element signature="e#694#695#0" expanded="true" />
             <element signature="e#720#721#0" expanded="true" />
@@ -846,10 +848,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        <state relative-caret-position="392">
+          <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
           <folding>
-            <element signature="e#610#611#0" expanded="true" />
             <element signature="e#649#650#0" expanded="true" />
             <element signature="e#694#695#0" expanded="true" />
             <element signature="e#720#721#0" expanded="true" />
