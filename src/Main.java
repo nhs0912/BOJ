@@ -1,17 +1,35 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Main {
-    static int isNumber(int roomNo)
-    {//몇번째로 갈 수 있는지 알아내는 메서드
-        int a = 6*i
-
-        return 0;
+    Main() {
+        int num = scan();
+        String txt = whatFraction(num);
+        Print(txt);
     }
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int roomNo=Integer.parseInt(br.readLine());
-        System.out.println(isNumber(roomNo));
+
+    int scan() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextInt();
+    }
+
+    static String whatFraction(int num) {
+        int up = 0; //분자
+        int down = 0; //분모
+        if(num%10!=0) {
+            up = (num / 10) + 1;
+            down = num % 10;
+        }
+        else{//10의 배수이면
+            up=num/10;
+            down=10;
+        }
+        String txt = up + "/" + down;
+        return txt;
+    }
+    void Print(String txt) {
+        System.out.println(txt);
+    }
+    public static void main(String[] args) {
+        new Main();
     }
 }
