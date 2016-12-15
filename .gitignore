@@ -13,3 +13,6 @@ hs_err_pid*
 
 #ignore a out folder
 .out/
+
+src/Problems/Problem_10039.java
+out/
