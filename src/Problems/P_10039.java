@@ -1,4 +1,4 @@
-package P11000;
+package Problems;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Created by nhs0912 on 2016-12-15.
  */
-public class Problem_10039 {
+public class P_10039 {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         int sum = 0;
