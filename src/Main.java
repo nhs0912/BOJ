@@ -15,20 +15,27 @@ public class Main {
     static String whatFraction(int num) {
         int up = 0; //분자
         int down = 0; //분모
-        if(num%10!=0) {
-            up = (num / 10) + 1;
-            down = num % 10;
+        int n = 1;
+        String txt;
+        String Fraction;
+        //Boolean exitCheck = false;
+        for (int i = 1; i <= num; i++) {
+            for (int j = 1; j <= i; j++) {
+                if (i % 2 != 0) {//홀수 일 때
+                    up = i;
+
+                }
+                txt = up + "/" + down;
+            }
         }
-        else{//10의 배수이면
-            up=num/10;
-            down=10;
-        }
-        String txt = up + "/" + down;
+
         return txt;
     }
+
     void Print(String txt) {
-        System.out.println(txt);
+        //System.out.println(txt);
     }
+
     public static void main(String[] args) {
         new Main();
     }
