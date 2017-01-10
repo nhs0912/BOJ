@@ -1,38 +1,43 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 class Main {
     public static void main(String[] args) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int totalCnt = 0;//총 쇠막대기 갯수
-        String str = br.readLine().trim();
-        char[] parenthesis = str.toCharArray();//String to char[]
-        boolean isOpen=false;
-        int stickCnt=0;
-        for(int i=0; i<parenthesis.length;i++)
-        {
-            if(!isOpen && parenthesis[i] =='('){
-                //닫혀있고 '(' 이라면 열어준다.
-                isOpen=true;
-            }
-            else if(isOpen && parenthesis[i]=='(')
-            {//열려있으면서 '(' 만났다면 쇠막대기 갯수 증가
-                stickCnt++;
-            }
-            else if(isOpen && parenthesis[i]==')')
-            {//열려있는데 ')' 만난다면 레이저 갯수 증가
-                totalCnt+=stickCnt;
-                isOpen=false;
+        String[] InOffice;
+        String[] people;
+        StringTokenizer st = new StringTokenizer(br.readLine().trim());
+        int n = Integer.parseInt(st.nextToken());
+        InOffice = new String[n];
+        people = new String[n];
+        int index = 0;
+        while (n > 0) {
+            n--;
+            st = new StringTokenizer(br.readLine().trim());
+            String name = st.nextToken();
+            String order = st.nextToken();
 
-            }
-            else if(!isOpen && parenthesis[i]==')')
-            {
-                stickCnt--;
-                totalCnt++;
+            switch (order) {
+                case "enter":
+                    people[index++] = name;
+                    break;
+                case "leave":
+                    for (int i = 0; i < people.length; i++) {
+                        if (people[i].equals(name)) {
+                            people[i] = null;
+                            break;
+                        }
+                    }
+                    break;
             }
         }
-        System.out.println(totalCnt);
-        // s.display();
+        for (int i = 0; i < people.length; i++) {
+            if (people[i] != null) {
+                System.out.println(people[i]);
+            }
+        }
+
+
     }
 }
