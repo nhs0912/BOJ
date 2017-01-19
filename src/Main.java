@@ -54,32 +54,59 @@ class Main {
 
         int rankNum = 1;
         int overlapRank = 0;//중복 점수 갯수
-        for (int i = 0; i < tmpArr.length - 1; i++) {
-            if (tmpArr[i] != tmpArr[i + 1]) {//점수가 다르다면
-                rankArr[i] = rankNum++;
-                if (i == tmpArr.length - 2) {//마지막 배열이라면
-                    rankArr[i + 1] = rankNum + overlapRank; //공동 순위를 포함해서 순위 계산
+        int previousNum = 0;
+        for (int i = 0; i < tmpArr.length; i++) {
+            if (i != tmpArr.length - 1) {
+                //마지막 배열이 아니라면
+                if (tmpArr[i] != tmpArr[i + 1]) {//점수가 다르다면
+                    if (overlapRank != 0 && previousNum == tmpArr[i]) {//중복 순위가 있고, 전 숫자와 현대 숫자와 일치한다면
+                        rankArr[i] = rankNum;
+                        overlapRank++;
+
+                    } else {
+                        rankArr[i] = (rankNum++) + overlapRank;
+                        overlapRank = 0;//중복 점수 갯수 초기화
+                    }
+
+                } else {//점수가 동일하면
+                    rankArr[i] = rankNum;
+                    overlapRank++;
+                    previousNum = tmpArr[i];
                 }
-                overlapRank = 0;//중복 점수 갯수 초기화
-            } else {//점수가 동일하면
-                rankArr[i] = rankNum;
-                overlapRank++;
+            } else {
+                //마지막 배열이면
+                if (previousNum == tmpArr[i]) {//전 숫자와 지금 숫자가 일치하면
+                    rankArr[i] = rankNum;
+                } else {
+                    if(overlapRank != 0) {//중복된 숫자가 있으면
+                        rankArr[i] = rankArr[i - 1] + overlapRank;
+                    }else{
+                        rankArr[i] = rankArr[i - 1] + 1;
+                    }
+                }
             }
         }
-        for (int num : tmpArr){
-            System.out.print(num+" ");
-        }
-            System.out.println();
-        for (int num : teamScore){
+
+        for(int num: tmpArr)
+        {
             System.out.print(num+" ");
         }
         System.out.println();
+        for(int num: teamScore)
+        {
+            System.out.print(num+" ");
+        }
+        System.out.println();
+        for(int num: rankArr)
+        {
+            System.out.print(num+" ");
+        }
         for (int i = 0; i < teamScore.length; i++) {
             for (int j = 0; j < tmpArr.length; j++) {
                 if (teamScore[i] == tmpArr[j]) {
-                    if(i!=rankArr.length-1) {
+                    if (i != rankArr.length - 1) {
                         bw.write(rankArr[j] + "\n");
-                    }else{
+                    } else {
                         bw.write(Integer.toString(rankArr[j]));
                     }
                     break;
