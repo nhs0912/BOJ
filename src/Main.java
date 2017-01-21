@@ -1,83 +1,142 @@
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
- * 2017-01-20
- * 문제 번호 : 9020
- * 문제 이름 : 골드바흐의 추측
- * 문제 사이트 주소 : https://www.acmicpc.net/problem/9020
+ * 문제 이름 : 괄호의 값
+ * 문제 번호 : 2504
+ * 문제 사이트 : https://www.acmicpc.net/problem/2504
  */
+class Stack {
+    private int size = 0;
+    private char[] datas;
+    int top = -1;
+    boolean overPopCheck = true;//stack이 비어있을 때 pop을 하였는지 검사
+
+    Stack(int size) {
+        this.size = size;
+        datas = new char[size];
+    }
+
+    boolean isEmpty() {
+        return top == -1;
+    }
+
+    boolean isFull() {
+        return top == datas.length - 1;
+    }
+
+    void push(char data) {
+        if (!isFull()) {
+            datas[++top] = data;
+        } else {
+            //System.out.println("가득찼습니다.");
+        }
+    }
+
+    char pop() {
+        if (!isEmpty()) {
+            return datas[top--];
+        } else {
+            //System.out.println("스택에 데이터가 없습니다.");
+            overPopCheck = false;
+            return 0;
+        }
+    }
+
+    char peek() {
+        if (!isEmpty()) {
+            return datas[top];
+        } else {
+            System.out.println("스택에 데이터가 없습니다.");
+            return 0;
+        }
+    }
+
+    int getSize() {
+        return size;
+    }
+
+    int getTop() {
+        return top;
+    }
+
+    boolean setoverPopCheck(boolean overPopCheck) {
+        this.overPopCheck = overPopCheck;
+        return overPopCheck;
+    }
+
+    boolean getoverPopCheck() {
+        return overPopCheck;
+    }
+}
+
+
 class Main {
-
-    int[] numbers;
-    ArrayList<Integer> primeNumbers = new ArrayList<>();
-    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    int cnt = 0;//PrimeNumber count
-    int[] smallPrimeNumber;
-
-    boolean isPrimeNumber(int n) {
-
-        if (numbers[n] != 1) {
-            //제거 되지 않은 수라면
-            for (int i = 0; i < primeNumbers.size(); i++) {
-                if (n % primeNumbers.get(i).intValue() != 0) {
-                    return true;
-                } else {
-                    //약수 중에 나누어진다면
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    void getPrimeNumber(int m) {
-        for (int i = 2; i <= m; i++) {
-            if (isPrimeNumber(i)) {//소수라면
-                primeNumbers.add(i);//add primeNumber in ArrayList.
-                for (int j = 2; j * i <= m; j++) {
-                    numbers[j * i] = 1;
-                }
-            }
-        }
-    }
-
-    void display(int n, int m) throws IOException {
-        cnt = 0;
-        System.out.println("소수 갯수 = " + primeNumbers.size());
-        System.out.println("primeNumbers ");
-        for(int i=0; i<primeNumbers.size();i++)
-        {
-            System.out.print(primeNumbers.get(i)+" ");
-        }
-        System.out.println();
-        for (int i = n; i <= m; i++) {
-            if (numbers[i] == 0 && i != 1 && i != 0) {
-                cnt++;
-                System.out.print(i + " ");
-            }
-        }
-
-    }
-
-    void Solve() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(br.readLine().trim());
-        while (T-- > 0) {
-            int n = 2;
-            int m = Integer.parseInt(br.readLine().trim());
-            numbers = new int[m + 1];
-            getPrimeNumber(m);
-            display(n, m);
-        }
-
-        bw.close();
-
-    }
-
     public static void main(String[] args) throws IOException {
-        new Main().Solve();
 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        boolean isRight = true; //올바른 괄호 검사
+        String str = br.readLine().trim();
+        char[] parenthesis = str.toCharArray();
+        int sum = 1;
+        int total = 0;
+        Stack s = new Stack(parenthesis.length);
+        for (int i = 0; i < parenthesis.length; i++) {
+            char data = parenthesis[i];
+            switch (data) {
+                case '(':
+                case '[':
+                    s.push(data);
+                    break;
+                case ')':
+                case ']':
+                    char pop = s.pop();
+                    char prevPop;
+                    if ('(' == pop && data != ')' || '[' == pop && ']' != data) {
+                        //올바르지 않은 괄호이면
+                        isRight = false;
+                        total = 0;
+                        break;
+                    } else {
+                        //올바른 괄호라면
+                        if (s.isEmpty()) {
+                            if (pop == '(') {
+                                total += sum * 2;
+                            } else {
+                                total += sum * 3;
+                            }
+
+                            sum = 1;
+                        } else {
+
+                            if (pop == '(') {
+                                if (prevPop == pop) {
+                                    sum *= 2;
+                                } else {
+                                    sum += 2;
+                                }
+                            } else if (pop == '[') {
+
+                                if (prevPop == pop) {
+                                    sum *= 3;
+                                } else {
+                                    sum += 3;
+                                }
+
+                            }
+                            prevPop = pop;
+                        }
+                    }
+            }
+        }
+        System.out.println(total);
+        if (s.isEmpty() && s.getoverPopCheck() && isRight) {
+            bw.write("YES" + "\n");
+        } else {
+            bw.write("NO" + "\n");
+        }
+        bw.close();
     }
 
 
