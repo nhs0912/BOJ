@@ -7,10 +7,6 @@ import java.io.*;
  */
 
 
-class A<T> {
-    T t;
-
-}
 
 class Stack<T> {
     private int size = 0;
