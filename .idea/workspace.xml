@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="785a1555-1141-4730-b9b8-eb0e70121bdc" name="Default" comment="-5622번 풀이 추가&#10;-폴더 이름 변경&#10;-문제 번호 이름 변경 &#10;(Problem_문제번호 -&gt; P_문제번호)" />
-    <list default="true" id="e97d1650-f14e-4488-8408-77d042793a21" name="ignore" comment="문제 미완성">
+    <list default="true" id="e97d1650-f14e-4488-8408-77d042793a21" name="ignore" comment="문제 미완성2">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
     </list>
     <ignored path="BOJ.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +27,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="713">
-              <caret line="130" column="25" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
+            <state relative-caret-position="1957">
+              <caret line="103" column="26" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
               <folding>
                 <element signature="e#431#432#0" expanded="true" />
                 <element signature="e#463#464#0" expanded="true" />
@@ -750,7 +749,7 @@
       <workItem from="1482853935806" duration="36000" />
       <workItem from="1483346136637" duration="881000" />
       <workItem from="1483693042969" duration="20070000" />
-      <workItem from="1484049743502" duration="25823000" />
+      <workItem from="1484049743502" duration="26023000" />
     </task>
     <task id="LOCAL-00001" summary="-5622번 풀이 추가&#10;-폴더 이름 변경&#10;-문제 번호 이름 변경 &#10;(Problem_문제번호 -&gt; P_문제번호)">
       <created>1481771592350</created>
@@ -836,11 +835,18 @@
       <option name="project" value="LOCAL" />
       <updated>1484882686534</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="문제 미완성2">
+      <created>1485008666463</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1485008666463</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85613000" />
+    <option name="totallyTimeSpent" value="85813000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="727" extended-state="0" />
@@ -899,7 +905,8 @@
     <MESSAGE value="P_10845 큐 구현하기 문제 추가" />
     <MESSAGE value="1929 소수 구하기 문제 추가" />
     <MESSAGE value="문제 미완성" />
-    <option name="LAST_COMMIT_MESSAGE" value="문제 미완성" />
+    <MESSAGE value="문제 미완성2" />
+    <option name="LAST_COMMIT_MESSAGE" value="문제 미완성2" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1273,8 +1280,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="713">
-          <caret line="130" column="25" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
+        <state relative-caret-position="1957">
+          <caret line="103" column="26" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
           <folding>
             <element signature="e#431#432#0" expanded="true" />
             <element signature="e#463#464#0" expanded="true" />
