@@ -7,7 +7,6 @@ import java.io.*;
  */
 
 
-
 class Stack<T> {
     private int size = 0;
     //private char[] datas;
@@ -88,7 +87,7 @@ class Main {
         Stack sumStack = new Stack(parenthesis.length);
         int sum = 1;
         int total = 0;
-
+        boolean pushCheck = false;
 
         Stack s = new Stack(parenthesis.length);
         for (int i = 0; i < parenthesis.length; i++) {
@@ -97,6 +96,11 @@ class Main {
                 case '(':
                 case '[':
                     s.push(data);
+                    pushCheck = true;
+                    if (pushCheck) {
+                        sumStack.push(sum);
+                        sum = 1;
+                    }
                     break;
                 case ')':
                 case ']':
@@ -108,24 +112,26 @@ class Main {
                         break;
                     } else {
                         //올바른 괄호라면
+                        if (!pushCheck) {
+                            if (pop == '(') {
+                                sum *= 2;
+                            } else {
+                                sum *= 3;
+                            }
+                        } else {
+                            if (pop == '(') {
+                                sum += 2;
+                            } else {
+                                sum += 3;
+                            }
 
-                        if (s.isEmpty()) {
-                            //비어있는 상태면
-                            if (pop == '(') {
-                                sum *= 2;
-                            } else {
-                                sum *= 3;
-                            }
-                            sumStack.push(sum);
-                            sum = 1;
-                        } else {// 비어있지 않은 상태이면
-                            if (pop == '(') {
-                                sum *= 2;
-                            } else {
-                                sum *= 3;
-                            }
+
                         }
 
+//                        sumStack.push(sum);
+//                        sum = 1;
+
+                        pushCheck = false;
 
                     }
             }
