@@ -1,152 +1,71 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 /**
- * 문제 이름 : 괄호의 값
- * 문제 번호 : 2504
- * 문제 사이트 : https://www.acmicpc.net/problem/2504
+ * 문제 이름 : 트리 순회
+ * 문제 번호 : 1991
+ * 문제 사이트 : https://www.acmicpc.net/problem/1991
  */
-
-
-class Stack<T> {
-    private int size = 0;
-    //private char[] datas;
-    private T[] datas;
-    int top = -1;
-
-    boolean overPopCheck = true;//stack이 비어있을 때 pop을 하였는지 검사
-
-    Stack(int size) {
-
-        this.size = size;
-
-        datas = (T[]) new Object[size];
-    }
-
-    boolean isEmpty() {
-        return top == -1;
-    }
-
-    boolean isFull() {
-        return top == datas.length - 1;
-    }
-
-    void push(T data) {
-        if (!isFull()) {
-            datas[++top] = data;
-        } else {
-            //System.out.println("가득찼습니다.");
-        }
-    }
-
-    T pop() {
-        if (!isEmpty()) {
-            return datas[top--];
-        } else {
-            //System.out.println("스택에 데이터가 없습니다.");
-            overPopCheck = false;
-            return null;
-        }
-    }
-
-    T peek() {
-        if (!isEmpty()) {
-            return datas[top];
-        } else {
-            System.out.println("스택에 데이터가 없습니다.");
-            return null;
-        }
-    }
-
-    int getSize() {
-        return size;
-    }
-
-    int getTop() {
-        return top;
-    }
-
-    boolean setoverPopCheck(boolean overPopCheck) {
-        this.overPopCheck = overPopCheck;
-        return overPopCheck;
-    }
-
-    boolean getoverPopCheck() {
-        return overPopCheck;
-    }
-}
-
-
 class Main {
-    public static void main(String[] args) throws IOException {
 
+    char[] Tree = new char[53];
+
+    void inOrder(int root) {
+        if (Tree[root] != '.') {
+            inOrder(root * 2);
+            System.out.print(Tree[root]);
+            inOrder((root * 2) + 1);
+        }
+    }
+
+    void preOrder(int root) {
+        if(Tree[root] ==' '){
+            System.out.println("자식 없음");
+        }
+        if (Tree[root] != '.') {
+            System.out.print(Tree[root]);
+            preOrder(root * 2);
+            preOrder((root * 2) + 1);
+        }
+    }
+
+    void postOrder(int root) {
+        if (Tree[root] != '.') {
+            postOrder(root * 2);
+            postOrder((root * 2) + 1);
+            System.out.print(Tree[root]);
+        }
+    }
+
+
+    void Solve() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        boolean isRight = true; //올바른 괄호 검사
-        String str = br.readLine().trim();
-        char[] parenthesis = str.toCharArray();
-        Stack sumStack = new Stack(parenthesis.length);
-        int sum = 1;
-        int total = 0;
-        boolean pushCheck = false;
 
-        Stack s = new Stack(parenthesis.length);
-        for (int i = 0; i < parenthesis.length; i++) {
-            char data = parenthesis[i];
-            switch (data) {
-                case '(':
-                case '[':
-                    s.push(data);
-                    pushCheck = true;
-                    if (pushCheck) {
-                        sumStack.push(sum);
-                        sum = 1;
-                    }
+        int N = Integer.parseInt(br.readLine().trim());
+        Tree[1] = 'A';
+        int index = 0;
+        while (N-- > 0) {//N만큼 입력 받기
+            StringTokenizer st = new StringTokenizer(br.readLine().trim());
+            char data = st.nextToken().charAt(0);
+            for (int i = 1; i < Tree.length; i++) {
+                if (Tree[i] == data) {
+                    index = i;//parent
                     break;
-                case ')':
-                case ']':
-                    char pop = (char) s.pop();
-                    if ('(' == pop && data != ')' || '[' == pop && ']' != data) {
-                        //올바르지 않은 괄호이면
-                        total = 0;
-                        isRight = false;
-                        break;
-                    } else {
-                        //올바른 괄호라면
-                        if (!pushCheck) {
-                            if (pop == '(') {
-                                sum *= 2;
-                            } else {
-                                sum *= 3;
-                            }
-                        } else {
-                            if (pop == '(') {
-                                sum += 2;
-                            } else {
-                                sum += 3;
-                            }
-
-
-                        }
-
-//                        sumStack.push(sum);
-//                        sum = 1;
-
-                        pushCheck = false;
-
-                    }
+                }
             }
+            Tree[index * 2] = st.nextToken().charAt(0); //left
+            Tree[(index * 2) + 1] = st.nextToken().charAt(0); //right
+
         }
-        while (!sumStack.isEmpty()) {
-            total += (int) sumStack.pop();
-        }
-        System.out.println(total);
-        if (s.isEmpty() && s.getoverPopCheck() && isRight) {
-            bw.write("YES" + "\n");
-        } else {
-            bw.write("NO" + "\n");
-        }
-        bw.close();
+        preOrder(1);
+        System.out.println();
+        inOrder(1);
+        System.out.println();
+        postOrder(1);
     }
 
-
+    public static void main(String[] args) throws IOException {
+        new Main().Solve();
+    }
 }

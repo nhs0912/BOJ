@@ -1,144 +1,39 @@
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
-//import java.util.StringTokenizer;
+//import java.util.Scanner;
 //
-//class ListNode {
-//    int data;
-//    ListNode link;
+///**
+// *  문제 번호 : 2504
+// *  문제 이름 : 괄호의 값
+// *  문제 주소 : https://www.acmicpc.net/problem/2504
+// */
+//class Test {
 //
-//    ListNode() {
-//        this.data = 0;
-//        this.link = null;
-//    }
 //
-//    ListNode(int num) {
-//        this.data = num;
+//    public static void main(String[] args) {
 //
-//    }
-//
-//    ListNode(int num, ListNode link) {
-//        this.data = num;
-//        this.link = link;
-//    }
-//
-//    public int getData() {
-//        return this.data;
-//    }
-//}
-//
-//class LinkedList {
-//
-//    private ListNode head;
-//
-//    public LinkedList() {
-//        head = null;
-//
-//    }
-//
-//    public void insertMiddleNode(ListNode pre, int num) {
-//        ListNode newNode = new ListNode(num);
-//        newNode.link = pre.link;
-//        pre.link = newNode;
-//    }
-//
-//    public void insertLastNode(int num) {
-//        ListNode newNode = new ListNode(num);
-//        if (head == null) {
-//            this.head = newNode;
-//
-//        } else {
-//            ListNode temp = head;
-//            while (temp.link != null) {
-//                temp = temp.link;
+//        Scanner sc = new Scanner(System.in);
+//        String str = sc.nextLine();
+//        int[] check = new int[str.length()];
+//        int[] point = new int[str.length()];
+//        char[] a = str.toCharArray();
+//        int j = 0;
+//        for (int i = 0; i < str.length(); i++) {
+//            if (a[i] == '(' || a[i] == '[') {
+//                check[j++] = (a[i] == '(' )? ')' : ']';
 //            }
-//            temp.link = newNode;
-//        }
-//    }
-//
-//    public void deleteLastNode() {
-//        ListNode pre, temp;
-//        if (head == null) {
-//            return;
-//        }
-//        if (head.link == null) {
-//            head = null;
-//        } else {
-//            pre = head;
-//            temp = head.link;
-//            while (temp.link != null) {
-//                pre = temp;
-//                temp = temp.link;
-//            }
-//            pre.link = null;
-//
-//        }
-//    }
-//
-//    public ListNode searchNode(int num) {
-//        ListNode temp = this.head;
-//        while (temp != null) {
-//            if (num == temp.getData()) {
-//                return temp;
-//            } else {
-//                temp = temp.link;
+//            if (a[i] == ')' || a[i] == ']') {
+//                --j;
+//                if (j < 0 || check[j] != a[i]) {
+//                    point[0] = 0;
+//                    break;
+//                }
+//                point[j] += (check[j] == ')' ? 2 : 3) * (point[j + 1]!=0 ? point[j + 1] : 1);
+//                point[j + 1] = 0;
 //            }
 //        }
-//        return temp;
-//    }
-//
-//
-//}
-//
-//class Stack {
-//
-//    ListNode top;
-//
-//    //Boolean isFull(){
-////
-////    return
-////}
-//    Boolean isEmpty() {
-//        return (top == null);
-//    }
-//
-//    public void push(int num) {
-//        ListNode newNode = new ListNode();
-//        newNode.data = num;
-//        newNode.link = top;
-//        top = newNode;
-//
-//    }
-//
-//    public int pop() {
-//        if (isEmpty()) {
-//            return 0;
-//        } else {
-//            int num = top.data;
-//            top = top.link;
-//            return num;
-//        }
-//    }
-//
-//    public int peek() {
-//        if (isEmpty()) {
-//            return 0;
-//        } else {
-//            return top.data;
-//        }
+//        System.out.println(point[0]);
 //    }
 //
 //}
 //
-//public class Test {
 //
-//
-//    public static void main(String[] args) throws IOException {
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        StringTokenizer st = new StringTokenizer(br.readLine());
-//        while (st.hasMoreTokens()) {
-//            System.out.println(st.nextToken());
-//        }
-//    }
-//}
 //
