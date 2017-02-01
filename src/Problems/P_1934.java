@@ -1,3 +1,5 @@
+package Problems;
+
 import java.io.*;
 import java.util.StringTokenizer;
 
@@ -6,7 +8,7 @@ import java.util.StringTokenizer;
  * 문제 이름 : 최소공배수
  * 문제 주소 : https://www.acmicpc.net/problem/1934
  */
-class Main {
+class P_1934 {
 
     int getGCD(int num1, int num2) {
         if (num1 < num2) {
@@ -43,7 +45,7 @@ class Main {
             st = new StringTokenizer(br.readLine().trim());
             int num1 = Integer.parseInt(st.nextToken());
             int num2 = Integer.parseInt(st.nextToken());
-            int gcd = new Main().Solution(num1, num2);
+            int gcd = new P_1934().Solution(num1, num2);
             int result =(num1/gcd) * (num2/gcd) * gcd;
             bw.write(Integer.toString(result) + "\n");
         }
