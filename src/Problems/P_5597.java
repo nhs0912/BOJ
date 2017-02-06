@@ -1,3 +1,5 @@
+package Problems;
+
 import java.io.*;
 
 
@@ -6,7 +8,7 @@ import java.io.*;
  * 문제 이름 : 과제 안 내신 분..?
  * 문제 주소 : https://www.acmicpc.net/problem/5597
  */
-class Main {
+class P_5597 {
 
 
     void Solve() throws IOException {
@@ -29,7 +31,7 @@ class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        new Main().Solve();
+        new P_5597().Solve();
     }
 }
 
