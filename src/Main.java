@@ -1,31 +1,49 @@
 import java.io.*;
 
-
 /**
- * 문제 번호 : 5597
- * 문제 이름 : 과제 안 내신 분..?
- * 문제 주소 : https://www.acmicpc.net/problem/5597
+ * 문제 번호 : 2193
+ * 문제 이름 : 이친수
+ * 문제 주소 : https://www.acmicpc.net/problem/2193
  */
 class Main {
+    boolean checkBinary = true;
+    StringBuilder binaryNumber = new StringBuilder();
 
+    int pow(int N) {
+        //2의 거듭제곱
+        int num = 1;
+        for (int i = 0; i < N; i++) {
+            num *= 2;
+        }
+        return num;
+    }
+
+    void getBinaryNum(int num) {
+        if (num < 2) {
+            binaryNumber.append(num);
+        } else {
+            getBinaryNum(num / 2);
+            binaryNumber.append(num % 2);
+        }
+    }
 
     void Solve() throws IOException {
-        int[] students = new int[31];
-        int N = 28;
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        while (N-- > 0) {
+        int N = Integer.parseInt(br.readLine().trim());
+        int cnt = pow(N);//경우의 수
+        String[] binaryNums = new String[cnt];
 
-            int num = Integer.parseInt(br.readLine().trim());
-            students[num]++;
+        for (int i = 0; i < cnt; i++) {
+            getBinaryNum(N);
+            binaryNums[i] = binaryNumber.toString();
+            binaryNumber = new StringBuilder();
         }
 
-        for (int i = 1; i < students.length; i++) {
-            if (students[i] == 0) {
-                bw.write(i + "\n");
-            }
-        }
-        bw.close();
+
+
+
+        System.out.println(binaryNumber);
+
     }
 
     public static void main(String[] args) throws IOException {
