@@ -80,7 +80,7 @@ class LinkedQueue {
 
     public void display() {
         if (isEmpty()) {
-           System.out.println("데이터가 없습니다");
+            System.out.println("데이터가 없습니다");
         } else {
             QNode head = front;
             while (head != null) {
@@ -93,11 +93,14 @@ class LinkedQueue {
 }
 
 class AdjMatrix {
-    private int matrix[][] = new int[10001][10001];
+    private int matrix[][] = new int[1001][1001];
     private int totalV = 1;
+    boolean[] visited;
 
     public void insertVertex(int v) {
-        totalV++;
+        //totalV++;
+        totalV = v + 1;
+        visited = new boolean[totalV];
     }
 
     public void insertEdge(int v1, int v2) {
@@ -108,29 +111,40 @@ class AdjMatrix {
         }
     }
 
+//    public void DFS(int start) {
+//        visited[start] = true;
+//        for (int i = 1; i <= totalV; i++) {
+//            if (matrix[start][i] == 1 && visited[i] == false) {
+//                System.out.print(i + " ");
+//                DFS(i);
+//            }
+//        }
+//
+//    }
+
 
     void DFS(int v) {
         boolean[] visited = new boolean[totalV];
         visited[v] = true;
         LinkedStack s = new LinkedStack();
         s.push(v);
+        s.push(v);
         System.out.print(v + " ");
+        int vertex = v;
         while (s.top != null) {
-
-            int vertex = s.pop();
+            //방문하지 않은 정점 탐색
             for (int i = 1; i < visited.length; i++) {
                 if (matrix[vertex][i] == 1 && visited[i] == false) {
                     s.push(i);
                     visited[i] = true;
                     vertex = i;
-                    //i=1;
+                    i = 0;
                     System.out.print(vertex + " ");
-
                 }
             }
+            vertex = s.pop();
         }
         System.out.println();
-
     }
 
     void BFS(int v) {
@@ -139,14 +153,16 @@ class AdjMatrix {
         q.enQueue(v);
         visited[v] = true;
         while (!q.isEmpty()) {
+            v = q.deQueue();
+            System.out.print(v + " ");
             for (int i = 1; i < totalV; i++) {
                 if (visited[i] == false && matrix[v][i] == 1) {
                     q.enQueue(i);
                     visited[i] = true;
                 }
             }
-            v = q.deQueue();
-            System.out.print(v + " ");
+
+
         }
     }
 
@@ -187,9 +203,8 @@ class Main {
 
 
         AdjMatrix MG = new AdjMatrix();
-        for (int i = 1; i < vertexCnt + 1; i++) {
-            MG.insertVertex(i);
-        }
+        MG.insertVertex(vertexCnt);
+
 
         while (edgeCnt-- > 0) {
             st = new StringTokenizer(br.readLine());
@@ -199,9 +214,11 @@ class Main {
             MG.insertEdge(end, start);
         }
 
-       // MG.printMatrix();
-       // System.out.println();
+        // MG.printMatrix();
+        // System.out.println();
+        //  System.out.print(startVertex+" ");
         MG.DFS(startVertex);
+        // System.out.println();
         MG.BFS(startVertex);
 
 
