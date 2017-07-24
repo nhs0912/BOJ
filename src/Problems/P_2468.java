@@ -1,3 +1,4 @@
+package Problems;
 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -7,7 +8,7 @@ import java.util.StringTokenizer;
  * 문제 이름 : 안전영역
  * 문제 주소 : https://www.acmicpc.net/problem/2468
  */
-class Main {
+class P_2468 {
     int[][] zone;
     boolean[][] visited;
     boolean[][] safeZone;
@@ -149,7 +150,7 @@ class Main {
 
 
     public static void main(String[] args) throws IOException {
-        new Main().Solve();
+        new P_2468().Solve();
     }
 
 }
