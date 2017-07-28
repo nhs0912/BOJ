@@ -1,5 +1,6 @@
 
 import java.io.*;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
@@ -8,9 +9,50 @@ import java.util.StringTokenizer;
  * 문제 주소 : https://www.acmicpc.net/problem/10942
  */
 
+class Merge {
+    static int[] sorted;
+
+    Merge(int size) {
+        sorted = new int[size];
+    }
+
+    void sort(int[] arr, int begin, int end) {
+        int middle;
+        if (begin < end) {
+            middle = (begin + end) / 2;
+            sort(arr, begin, middle);
+            sort(arr, middle + 1, end);
+            merge(arr, begin, middle, end);
+        }
+    }
+
+    void merge(int[] arr, int begin, int middle, int end) {
+        int left = begin;
+        int right = middle + 1;
+        int index = begin;
+        while (left <= middle && right <= end) {
+            if (arr[left] <= arr[right]) {
+                sorted[index++] = arr[left++];
+            }
+            if (arr[left] > arr[right]) {
+                sorted[index++] = arr[right++];
+            }
+        }
+        while (left <= middle && right > end) {
+            sorted[index++] = arr[left++];
+        }
+        while (left > middle && right <= end) {
+            sorted[index++] = arr[right++];
+        }
+        for (int i = begin; i <= end; i++) {
+            arr[i] = sorted[i];
+        }
+    }
+}
 
 class Main {
-    int[] data;
+    int[] subjectPoints;
+
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
     public void printArr(int[][] arr) {
@@ -24,66 +66,50 @@ class Main {
     }
 
     public void printArr(int[] arr) {
-        for (int i = 1; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
         System.out.println();
     }
 
-    public void findPalindrome(int start, int end) throws IOException {
-        if (start == end) {
-            bw.write("1\n");
-
-            //System.out.println("똑같다");
-        } else {
-            if (start > end) {
-                int tmp = start;
-                start = end;
-                end = tmp;
-            }
-
-
-            int mid = (start + end) / 2;
-            boolean check = true;
-            for (int i = start; i <= mid; i++) {
-                if (data[i] != data[end - i + 1]) {
-                    check = false;
-                }
-            }
-
-            if (check) {
-                bw.write("1\n");
-            } else {
-                bw.write("0\n");
-            }
-
-        }
-    }
 
     public void inputData() throws IOException {
         FileInputStream fis = new FileInputStream("test.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
         // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //Scanner sc = new Scanner(System.in);
 
+        int T = Integer.parseInt(br.readLine());
+        int cnt =1;
+        while (T-- > 0) {
 
-        int N = Integer.parseInt(br.readLine());
+            StringTokenizer st = new StringTokenizer(br.readLine());
 
-        data = new int[N + 1];
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int index = 1;
-        while (st.hasMoreTokens()) {
-            data[index++] = Integer.parseInt(st.nextToken());
-        }
-        // printArr(data);
-        int qCnt = Integer.parseInt(br.readLine());
-        while (qCnt-- > 0) {
+            int index = 0;
+            int subjectCnt = Integer.parseInt(st.nextToken());
+            int K = Integer.parseInt(st.nextToken());
+            subjectPoints = new int[subjectCnt];
+            int sum=0;
             st = new StringTokenizer(br.readLine());
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
-            findPalindrome(start, end);
-        }
 
+            while (st.hasMoreTokens()) {
+                subjectPoints[index++] = Integer.parseInt(st.nextToken());
+            }
+
+            Merge m = new Merge(subjectCnt);
+            m.sort(subjectPoints, 0, subjectPoints.length-1);
+
+            for(int i=subjectPoints.length-K;i<subjectPoints.length;i++)
+            {
+                sum+=subjectPoints[i];
+            }
+
+            bw.write("Case #"+cnt++ +"\n"+sum+"\n");
+
+
+        }
+        //System.out.println("끝");
         bw.close();
     }
 
