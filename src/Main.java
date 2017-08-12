@@ -25,6 +25,8 @@ class Main {
             System.out.println();
         }
 
+
+
     }
 
     public void printArr(boolean[][] arr) {

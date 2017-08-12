@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="785a1555-1141-4730-b9b8-eb0e70121bdc" name="Default" comment="">
+    <list default="true" id="785a1555-1141-4730-b9b8-eb0e70121bdc" name="Default" comment="바이러스 문제">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
     </list>
     <list id="e97d1650-f14e-4488-8408-77d042793a21" name="ignore" comment="안전영역 문제 추가 완성" />
     <ignored path="BOJ.iws" />
@@ -27,17 +28,17 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1860">
-              <caret line="125" column="40" lean-forward="true" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
+            <state relative-caret-position="405">
+              <caret line="27" column="8" lean-forward="false" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#printArr#0;class#Main#0" expanded="true" />
                 <element signature="method#printArr#1;class#Main#0" expanded="true" />
                 <element signature="method#printArr#2;class#Main#0" expanded="true" />
                 <element signature="method#initVisited#0;class#Main#0" expanded="true" />
                 <element signature="method#inputData#0;class#Main#0" expanded="true" />
                 <element signature="method#DFS#0;class#Main#0" expanded="true" />
                 <element signature="method#checkPath#0;class#Main#0" expanded="true" />
+                <element signature="method#Solve#0;class#Main#0" expanded="true" />
                 <element signature="method#main#0;class#Main#0" expanded="true" />
               </folding>
             </state>
@@ -157,8 +158,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
-    <option name="width" value="1280" />
-    <option name="height" value="723" />
+    <option name="width" value="1440" />
+    <option name="height" value="815" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -739,14 +740,21 @@
       <option name="project" value="LOCAL" />
       <updated>1502551567855</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="-5622번 풀이 추가&#10;-폴더 이름 변경&#10;-문제 번호 이름 변경 &#10;(Problem_문제번호 -&gt; P_문제번호)">
+      <created>1502551598784</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1502551598784</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="201711000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1280" height="723" extended-state="0" />
+    <frame x="0" y="22" width="1440" height="815" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -871,7 +879,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>90</line>
+          <line>92</line>
           <properties class="Main" />
           <option name="timeStamp" value="59" />
         </line-breakpoint>
@@ -1204,17 +1212,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1860">
-          <caret line="125" column="40" lean-forward="true" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
+        <state relative-caret-position="405">
+          <caret line="27" column="8" lean-forward="false" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#printArr#0;class#Main#0" expanded="true" />
             <element signature="method#printArr#1;class#Main#0" expanded="true" />
             <element signature="method#printArr#2;class#Main#0" expanded="true" />
             <element signature="method#initVisited#0;class#Main#0" expanded="true" />
             <element signature="method#inputData#0;class#Main#0" expanded="true" />
             <element signature="method#DFS#0;class#Main#0" expanded="true" />
             <element signature="method#checkPath#0;class#Main#0" expanded="true" />
+            <element signature="method#Solve#0;class#Main#0" expanded="true" />
             <element signature="method#main#0;class#Main#0" expanded="true" />
           </folding>
         </state>
