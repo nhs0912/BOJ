@@ -1,151 +1,157 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ * 코드그라운드
+ * "김씨만 행복한 세상"
+ */
+/*
+   As the name of the class should be Solution , using Solution.java as the filename is recommended.
+   In any case, you can execute your program by running 'java Solution' command.
+ */
+
+
+class myQueue {
+    int size;
+    int[] arr;
+    int front = 0;
+    int rear = 0;
+
+    myQueue(int size) {
+        this.size = size;
+        arr = new int[size + 1];
+    }
+
+    boolean isEmpty() {
+        return front == rear;
+    }
+
+    boolean isFull() {
+        return front == (arr.length - 1);
+    }
+
+    void enQueue(int data) {
+        if (!isFull()) {
+            arr[front++] = data;
+        }
+    }
+
+    int deQueue() {
+        if (!isFull()) {
+            return arr[rear++];
+        } else {
+            return 0;
+        }
+    }
+
+
+}
 
 class Solution {
     //static int Answer;
-    int[] v;//대각선
+    int[][] adjMatrix;
+    boolean[] visited;
+    char[] markedZone;
+    myQueue q;
+    int zoneCnt;
 
-
-    public void printArr(int[][] arr) {
+    void printArr(int[][] arr) {
         for (int i = 1; i < arr.length; i++) {
             for (int j = 1; j < arr[i].length; j++) {
-                System.out.printf("%5d", arr[i][j]);
+                System.out.print(arr[i][j] + " ");
             }
             System.out.println();
         }
-
     }
 
-    public void printArr(boolean[][] arr) {
+    void printArr(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
-            for (int j = 1; j < arr[i].length; j++) {
-                System.out.printf(arr[i][j] + "%5d");
-            }
-            System.out.println();
-        }
-
-    }
-
-    public void printArr(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.printf("%5d", arr[i]);
+            System.out.print(arr[i] + " ");
         }
         System.out.println();
     }
 
-    public void inputData(int N) throws FileNotFoundException {
-        if (N >= 2) {
-            int size = 2 * N - 3;
-            v = new int[size + 3];
-            int end = size + 3;
-            int num = 2;
-            v[3] = num;//초기값 설정
-            boolean isN = false;
-            for (int i = 4; i < end; i++) {
-                if (!isN) {
-                    v[i] = v[i - 1] + num;
-                    if (N == num) {
-                        isN = true;
-                        num--;
-                    } else {
-                        num++;
-                    }
-                } else {
-                    v[i] = v[i - 1] + num--;
-                }
-            }
-           // printArr(v);
+    void printArr(boolean[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    void printArr(char[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    void initMarkedZone() {
+        //'A' , 'B', 'N'
+        for (int i = 1; i < markedZone.length; i++) {
+            markedZone[i] = 'N';
         }
     }
 
-    public long calculateNum(String str, int moveCount, int N) {
-        long sum = 0;
-        int x = 1;
-        int y = 1;
-        for (int i = 0; i < moveCount; i++) {
-            switch (str.charAt(i)) {
-                case 'D':
-                    sum += findNum(++x, y, N);
-                    break;
-                case 'U':
-                    sum += findNum(--x, y, N);
-                    break;
-                case 'L':
-                    sum += findNum(x, --y, N);
-                    break;
-                case 'R':
-                    sum += findNum(x, ++y, N);
-                    break;
-            }
-        }
-        return sum;
-    }
+    void BFS(int start) {
 
-
-    public long findNum(int x, int y, int N) {
-
-        if (x == 1 && y == 1) {
-            return 1;
-        } else if (x == N && y == N) {
-            return N * N;
-        } else {
-            int line = x + y; //대각선 숫자
-
-            if (line <= N + 1) {
-                //대각선 라인 번호가 N보다 작으면
-                if (line % 2 == 0) {
-                    //짝수 이면
-                    int initY = 1;
-                    return v[line] + y - initY;
-                } else {
-                    //홀수 이면
-                    int initX = 1;
-                    return v[line] + x - initX;
+        visited[start] = true;
+        q.enQueue(start);
+        while (!q.isEmpty()) {
+            int here = q.deQueue();
+            System.out.print(here + "->");
+            for (int there = 1; there <= zoneCnt; there++) {
+                if (visited[there] || (adjMatrix[here][there] != 1)) {
+                    continue;
                 }
-            } else {
-                //대각선 라인 번호가 N보다 면
-                if (line % 2 == 0) {
-                    //짝수 이면
-                    int initY = line - N;
-                    return v[line] + y - initY;
-                } else {
-                    //홀수 이면
-                    int initX = line - N;
-                    return v[line] + x - initX;
-                }
+                visited[there] = true;
+                q.enQueue(there);
             }
         }
 
     }
 
+    public void solve() throws FileNotFoundException {
+        //Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(new FileInputStream("input.txt"));
+        // BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-
-    public void Solve() throws FileNotFoundException {
-      //  Scanner sc = new Scanner(System.in);
-        Scanner sc = new Scanner(new FileInputStream("test.txt"));
         int T = sc.nextInt();
-        for (int test_case = 0; test_case < T; test_case++) {
-            int N = sc.nextInt();
-            int moveCount = sc.nextInt();
-            String str = sc.next();
-            inputData(N);
-            System.out.println("Case #" + (test_case + 1));
-            if(N!=1) {
-                long result = calculateNum(str, moveCount, N);
-                System.out.println(result+1);
-            }else{
-                System.out.println(1);
-            }
 
+        for (int test_case = 0; test_case < T; test_case++) {
+            boolean isCheck = false;
+            zoneCnt = sc.nextInt();// 지역의 갯수
+            int adjZoneCnt = sc.nextInt();// 인접한 지역의 갯수
+            adjMatrix = new int[zoneCnt + 1][zoneCnt + 1];
+            visited = new boolean[zoneCnt + 1];
+            markedZone = new char[zoneCnt + 200];
+            q = new myQueue(zoneCnt + 1);
+            initMarkedZone();
+            int index = 0;
+
+            while (adjZoneCnt-- > 0) {
+                int neighborZone1 = sc.nextInt();
+                int neighborZone2 = sc.nextInt();
+                adjMatrix[neighborZone1][neighborZone2] = 1;
+            }
+            BFS(1);
+
+
+//            System.out.println("Case #" + (test_case + 1));
+//
+//            if (!isCheck) {
+//                System.out.println(1);
+//            } else {
+//                System.out.println(0);
+//            }
 
         }
-        sc.close();
-
     }
 
     public static void main(String args[]) throws Exception {
-        Solution s = new Solution();
-        s.Solve();
+        new Solution().solve();
+
     }
 }

@@ -4,18 +4,113 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
- * 문제 번호 : 2606
- * 문제 이름 : 바이러스
- * 문제 주소 : https://www.acmicpc.net/problem/2606
+ * 문제 번호 : 2910
+ * 문제 이름 : 빈도정렬
+ * 문제 주소 : https://www.acmicpc.net/problem/2910
  */
 
-class Main {
-    int[][] adjMatrix;
-    boolean[][] visited;
-    int virusCnt = 0;
-    int[][] result;//방문 가능 배열
-    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+class Number {
+    int num; //숫자
+    int firstIndex; //처음 나온 주소
+    int cnt; //빈도수
+
+    Number(int num, int firstIndex, int cnt) {
+        this.num = num;
+        this.firstIndex = firstIndex;
+        this.cnt = cnt;
+    }
+}
+
+class MergeSort {
+    Number[] sorted;
+
+    MergeSort(int size) {
+        sorted = new Number[size];
+    }
+
+    public void sortCnt(int begin, int end, Number[] arr) {
+        int mid;
+        if (begin < end) {
+            mid = (begin + end) / 2;
+            sortCnt(begin, mid, arr);
+            sortCnt(mid + 1, end, arr);
+            mergeCnt(begin, mid, end, arr);
+        }
+    }
+
+    public void sortOrder(int begin, int end, Number[] arr) {
+        int mid;
+        if (begin < end) {
+            mid = (begin + end) / 2;
+            sortOrder(begin, mid, arr);
+            sortOrder(mid + 1, end, arr);
+            mergeOrder(begin, mid, end, arr);
+        }
+    }
+
+    void mergeCnt(int begin, int middle, int end, Number[] arr) {
+        int left = begin;
+        int right = middle + 1;
+        int index = begin;
+        while (left <= middle && right <= end) {
+            if (arr[left].cnt < arr[right].cnt) {
+                sorted[index] = arr[right++];
+            } else {
+                sorted[index] = arr[left++];
+            }
+            index++;
+        }
+
+        while (left <= middle && right > end) {
+            sorted[index++] = arr[left++];
+
+        }
+        while (left > middle && right <= end) {
+            sorted[index++] = arr[right++];
+        }
+
+        for (int i = begin; i <= end; i++) {
+            arr[i] = sorted[i];
+        }
+    }
+
+    void mergeOrder(int begin, int middle, int end, Number[] arr) {
+        int left = begin;
+        int right = middle + 1;
+        int index = begin;
+        while (left <= middle && right <= end) {
+            if (arr[left].firstIndex <= arr[right].firstIndex) {
+                sorted[index] = arr[left++];
+            } else {
+                sorted[index] = arr[right++];
+            }
+            index++;
+        }
+
+        while (left <= middle && right > end) {
+            sorted[index++] = arr[left++];
+        }
+        while (left > middle && right <= end) {
+            sorted[index++] = arr[right++];
+        }
+
+        for (int i = begin; i <= end; i++) {
+            arr[i] = sorted[i];
+        }
+    }
+
+    public void initSorted() {
+        for (int i = 0; i < sorted.length; i++) {
+            sorted[i] = null;
+        }
+    }
+}
+
+class Main {
+
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    Number[] numberList;
 
     public void printArr(int[][] arr) {
         for (int i = 1; i < arr.length; i++) {
@@ -24,9 +119,17 @@ class Main {
             }
             System.out.println();
         }
+    }
 
+    public void fastPrintArr(int[][] arr) throws IOException {
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = 1; j < arr[i].length; j++) {
+                bw.write(arr[i][j] + " ");
 
-
+            }
+            bw.write("\n");
+        }
+        bw.close();
     }
 
     public void printArr(boolean[][] arr) {
@@ -36,7 +139,6 @@ class Main {
             }
             System.out.println();
         }
-
     }
 
     public void printArr(int[] arr) {
@@ -46,86 +148,77 @@ class Main {
         System.out.println();
     }
 
-    public void initVisited() {
-        for (int i = 1; i < visited.length; i++) {
-            for (int j = 1; j < visited[i].length; j++) {
-                visited[i][j] = false;
-            }
-        }
-    }
 
     public void inputData() throws IOException {
         FileInputStream fis = new FileInputStream("test.txt");
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-
         // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int vertexCnt = Integer.parseInt(br.readLine()); //정점 갯수
-        adjMatrix = new int[vertexCnt + 1][vertexCnt + 1]; //인접행렬
-        visited = new boolean[vertexCnt + 1][vertexCnt + 1];// 방문 검사
-        result = new int[vertexCnt + 1][vertexCnt + 1];// 방문 가능 배열
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());// message length
+        int C = Integer.parseInt(st.nextToken());//숫자 범위
+        int[][] numCnt = new int[3][N + 1];//빈도 수 저장
+        int[] numFirstIndex = new int[N + 1];// 숫자 처음 출현
+        boolean[] numVisited = new boolean[N + 1]; //처음 숫자인지 검사
+        st = new StringTokenizer(br.readLine());
         int index = 1;
-        int N = vertexCnt;
-        while (N-- > 0) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            while (st.hasMoreTokens()) {
-                for (int j = 1; j < vertexCnt + 1; j++) {
-                    int num = Integer.parseInt(st.nextToken());
-                    if (num == 1) {
-                        adjMatrix[index][j] = num;
-                        //adjMatrix[j][index] = num;
-                        //visited[index][j] = true;
-                        //visited[j][index] = true;
-                    } else if (num == 0) {
-                        adjMatrix[index][j] = num;
-                        //visited[index][j] = true;
-                    }
+        //int firstIndex = Integer.MAX_VALUE;
+        numberList = new Number[C + 1];
+        while (st.hasMoreTokens()) {
+            int num = Integer.parseInt(st.nextToken());
+            if (numVisited[num] != true) {
+                numCnt[1][index] = num;
+                numFirstIndex[num] = index++;
+                numVisited[num] = true;
+            }
+            for (int i = 1; i < numCnt[1].length; i++) {
+                if (numCnt[1][i] == num) {
+                    numCnt[2][i]++;
                 }
             }
-            index++;
+
         }
 
-        printArr(adjMatrix);
-        initVisited();//방문 배열 초기화
+
+        for (int i = 1; i < numCnt.length; i++) {
+            int number = i;
+            int firstIndex = numFirstIndex[i];
+            //int cnt = numCnt[i];
+            //Number num = new Number(number, firstIndex, cnt);
+            // numberList[i] = num;
+        }
+        printArr(numCnt);
+
+//        System.out.println("시작");
+//        for (int i = 1; i < numCnt[0].length; i++) {
+//            if (numCnt[1][i] != 0) {
+//                for (int j = 0; j < numCnt[2][i]; j++) {
+//                    System.out.print(numCnt[1][i] + " ");
+//                }
+//            } else {
+//                break;
+//            }
+//        }
+//        System.out.println();
+//        printArr(numFirstIndex);
     }
 
-    public boolean DFS(int start, int end) {
-
-        for (int i = 1; i < adjMatrix.length; i++) {
-            if (adjMatrix[start][i] == 1 && visited[start][i] == false) {
-                System.out.print(i + "-> ");
-                visited[start][i] = true;
-                DFS(i, end);
-                if (i == end) {
-                    return true;
-                }
-
+    public void printSortList() throws IOException {
+        for (int i = 1; i < numberList.length; i++) {
+            for (int j = 0; j < numberList[i].cnt; j++) {
+                //System.out.print(numberList[i].num + " ");
+                bw.write(numberList[i].num + " ");
             }
         }
-        System.out.println();
-        return false;
-    }
-
-
-    public void checkPath(int start, int end) {
-        boolean check = DFS(1, 1);
-        System.out.println("check=" + check);
+        // System.out.println();
+        bw.close();
     }
 
     public void Solve() throws IOException {
         inputData();
-
-        checkPath(1, 1);
-//        for (int i = 1; i < adjMatrix.length; i++) {
-//            for (int j = 1; j < adjMatrix[i].length; j++) {
-//                checkPath(i, j);
-//            }
-//        }
-        System.out.println("result");
-        printArr(result);
-
-        //DFS(1);
-        // System.out.println(virusCnt);
+//        MergeSort m = new MergeSort(numberList.length);
+//        m.sortOrder(1, numberList.length - 1, numberList);
+//        m.sortCnt(1, numberList.length - 1, numberList);
+//        printSortList();
     }
 
     public static void main(String[] args) throws IOException {
