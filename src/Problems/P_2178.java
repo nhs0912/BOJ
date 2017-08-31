@@ -1,6 +1,6 @@
+package Problems;
 
 import java.io.*;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
@@ -96,7 +96,7 @@ class myQueue implements myQueueDAO {
 
 }
 
-class Main {
+class P_2178 {
 
 
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -217,7 +217,7 @@ class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        new Main().Solve();
+        new P_2178().Solve();
     }
 
 }
