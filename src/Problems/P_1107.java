@@ -101,8 +101,6 @@ class P_1107 {
                     moveCnt = minPressBtn;
                 }
             }
-
-
         }
         System.out.println(moveCnt);
     }
