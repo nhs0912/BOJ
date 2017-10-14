@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Main {
+public class P_1697 {
 	final int MAX = 1000000;
 
 	class position {
@@ -61,6 +61,6 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		new Main().Solve();
+		new P_1697().Solve();
 	}
 }
