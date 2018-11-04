@@ -1,10 +1,12 @@
+package Problems;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Stack;
 
-class Main {
+
+class P_6603 {
 	int[] arr = { 1, 2, 3, 4 };
 	int[] numbers;
 	int[] permutation;
@@ -102,7 +104,7 @@ class Main {
 	}
 
 	public static void main(String[] args) throws IOException {
-		new Main().solve();
+		new P_6603().solve();
 
 	}
 }

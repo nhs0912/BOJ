@@ -1,3 +1,5 @@
+package Problems;
+
 import java.io.*;
 import java.util.StringTokenizer;
 
@@ -7,7 +9,7 @@ import java.util.StringTokenizer;
  * 카드 구매하기1
  * 11052번
  */
-class Main {
+class P_11052 {
 
     int[] valueArr;
     int N = 0;
@@ -69,6 +71,6 @@ class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        new Main().Solve();
+        new P_11052().Solve();
     }
 }

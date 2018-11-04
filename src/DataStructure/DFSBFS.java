@@ -16,9 +16,9 @@ class LinkedStack {
         return (top == null);
     }
 
-    public void push(int item) {
+    public void push(int data) {
         StackNode newNode = new StackNode();
-        newNode.data = item;
+        newNode.data = data;
         newNode.link = top;
         top = newNode;
     }
@@ -74,8 +74,10 @@ class LinkedQueue {
         } else {
             int item = front.data;
             front = front.link;
-            if (front == null)
+            if (front == rear) {
                 rear = null;
+                front = null;
+            }
             return item;
         }
     }
@@ -125,41 +127,6 @@ class AdjMatrix {
     }
 
 
-//    void DFS(int v) {
-//        boolean[] visited = new boolean[totalV];
-//        visited[v] = true;
-//        LinkedStack s = new LinkedStack();
-//        s.push(v);
-//        s.push(v);
-//        System.out.print(v + " ");
-//        int vertex = v;
-//        while (s.top != null) {
-//
-//            //방문하지 않은 정점 탐색
-//            for (int i = 1; i < visited.length; i++) {
-//                if (matrix[vertex][i] == 1 && visited[i] == false) {
-//                    s.push(i);
-//                    visited[i] = true;
-//                    vertex = i;
-//                    i = 0;
-//                    System.out.print(vertex + " ");
-//                }
-//            }
-//
-//            vertex = s.pop();
-//            //방문하지 않은 정점 탐색
-//            for (int i = 1; i < visited.length; i++) {
-//                if (matrix[vertex][i] == 1 && visited[i] == false) {
-//                    s.push(i);
-//                    visited[i] = true;
-//                    vertex = i;
-//                    i = 0;
-//                    System.out.print(vertex + " ");
-//                }
-//            }
-//        }
-//        System.out.println();
-//    }
 
     void BFS(int v) {
         boolean[] visited = new boolean[totalV];
@@ -175,8 +142,6 @@ class AdjMatrix {
                     visited[i] = true;
                 }
             }
-
-
         }
     }
 
@@ -197,7 +162,7 @@ class GraphNode {
 }
 
 
-class Main {
+class DFSBFS {
 
 
     public void Solve() throws IOException {
@@ -240,7 +205,7 @@ class Main {
 
 
     public static void main(String[] args) throws IOException {
-        new Main().Solve();
+        new DFSBFS().Solve();
     }
 
 }
